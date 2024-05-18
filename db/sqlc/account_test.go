@@ -31,7 +31,6 @@ func createRandomAccount(t *testing.T) Account {
 
 func TestCreateAccount(t *testing.T) {
 	createRandomAccount(t)
-
 }
 
 func TestGetAccount(t *testing.T) {
