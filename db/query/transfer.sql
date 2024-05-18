@@ -14,4 +14,3 @@ SELECT * FROM transfers
 ORDER BY id
 LIMIT $1
 OFFSET $2;
-
