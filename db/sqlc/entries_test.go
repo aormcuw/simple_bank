@@ -2,6 +2,7 @@ package simplebank
 
 import (
 	"context"
+	"simplebank/util"
 	"testing"
 	"time"
 
@@ -12,7 +13,7 @@ func createRandomEntries(t *testing.T) Entry {
 	account := createRandomAccount(t)
 	arg := CreateEntriesParams{
 		AccountID: account.ID,
-		Amount:    20,
+		Amount:    util.RandomMoney(),
 	}
 	entry, err := testQueries.CreateEntries(context.Background(), arg)
 	require.NoError(t, err)
