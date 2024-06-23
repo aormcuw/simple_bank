@@ -16,7 +16,7 @@ func TestTransferTx(t *testing.T) {
 	fmt.Println(">>before : ", account1.Balance, account2.Balance)
 
 	//run n concurrent transfer transaction
-	n := 2
+	n := 5
 	amount := int64(10)
 
 	errs := make(chan error)
@@ -78,15 +78,11 @@ func TestTransferTx(t *testing.T) {
 
 		// check account
 		fromAccount := result.FromAccount
-		fmt.Println("from account1id : ", account1.ID)
-		fmt.Println("from fromaccountid : ", fromAccount.ID)
 		require.NotEmpty(t, fromAccount)
 		require.Equal(t, account1.ID, fromAccount.ID)
 
 		toAccount := result.ToAccount
 		require.NotEmpty(t, toAccount)
-		fmt.Println("from account2id : ", account2.ID)
-		fmt.Println("from toaccountid :", toAccount.ID)
 		require.Equal(t, account2.ID, toAccount.ID)
 
 		// check accounts balance
