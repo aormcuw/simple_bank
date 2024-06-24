@@ -2,7 +2,7 @@ package api
 
 import (
 	"net/http"
-	simplebank "simplebank/db/sqlc"
+	db "simplebank/db/sqlc"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,7 +19,7 @@ func (server *Server) createAccount(ctx *gin.Context) {
 		return
 	}
 
-	arg := simplebank.CreateAccountParams{
+	arg := db.CreateAccountParams{
 		Owner:    req.Owner,
 		Currency: req.Currency,
 		Balance:  0,

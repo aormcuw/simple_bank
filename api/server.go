@@ -1,19 +1,19 @@
 package api
 
 import (
-	simplebank "simplebank/db/sqlc"
+	db "simplebank/db/sqlc"
 
 	"github.com/gin-gonic/gin"
 )
 
 // server serves http request for our banking service
 type Server struct {
-	store  *simplebank.Store
+	store  *db.Store
 	router *gin.Engine
 }
 
 // newserver create new http server and setup routing
-func NewServer(store *simplebank.Store) *Server {
+func NewServer(store *db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
