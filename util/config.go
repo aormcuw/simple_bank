@@ -5,9 +5,9 @@ import "github.com/spf13/viper"
 // config stores all configuration of application
 // the values are read by viper from a config file or environment variabel
 type Config struct {
-	DBDrive       string `mapstructure:"DB_DRIVER"`
+	DBDriver      string `mapstructure:"DB_DRIVER"`
 	DBSource      string `mapstructure:"DB_SOURCE"`
-	ServerAddress string `mapstructure:"SERVER_ADDRES"`
+	ServerAddress string `mapstructure:"SERVER_ADDRESS"`
 }
 
 func LoadConfig(path string) (config Config, err error) {
