@@ -37,7 +37,6 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 
 	result, err := server.store.TransferTx(ctx, arg)
 	if err != nil {
-		fmt.Printf("=============")
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
