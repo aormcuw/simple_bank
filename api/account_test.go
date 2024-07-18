@@ -2,6 +2,7 @@ package api
 
 import (
 	"bytes"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -39,6 +40,36 @@ func TestGetAccountAPI(t *testing.T) {
 				// check responses
 				require.Equal(t, http.StatusOK, recorder.Code)
 				requireBodyMatchAccount(t, recorder.Body, account)
+			},
+		},
+		{
+			name:      "Not Found",
+			accountID: account.ID,
+			buildStubs: func(store *mockdb.MockStore) {
+				//build stubs
+				store.EXPECT().
+					GetAccount(gomock.Any(), gomock.Eq(account.ID)).
+					Times(1).
+					Return(db.Account{}, sql.ErrNoRows)
+			},
+			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+				// check responses
+				require.Equal(t, http.StatusNotFound, recorder.Code)
+			},
+		},
+		{
+			name:      "Internal Error",
+			accountID: account.ID,
+			buildStubs: func(store *mockdb.MockStore) {
+				//build stubs
+				store.EXPECT().
+					GetAccount(gomock.Any(), gomock.Eq(account.ID)).
+					Times(1).
+					Return(db.Account{}, sql.ErrConnDone)
+			},
+			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+				// check responses
+				require.Equal(t, http.StatusInternalServerError, recorder.Code)
 			},
 		},
 		// TODO :add more cases
