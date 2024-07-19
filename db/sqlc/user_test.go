@@ -31,7 +31,7 @@ func createRandomUser(t *testing.T) User {
 }
 
 func TestCreateUser(t *testing.T) {
-	createRandomAccount(t)
+	createRandomUser(t)
 }
 
 // func TestGetAccount(t *testing.T) {
