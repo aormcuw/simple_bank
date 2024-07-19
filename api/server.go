@@ -8,6 +8,8 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+//  PR : BUAT UNIT TEST UNTUK FILE YANG LAIN DI API
+
 // server serves http request for our banking service
 type Server struct {
 	store  db.Store
