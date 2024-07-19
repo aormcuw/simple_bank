@@ -4,6 +4,7 @@ import (
 	"context"
 	"simplebank/util"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 )
@@ -34,15 +35,18 @@ func TestCreateUser(t *testing.T) {
 	createRandomUser(t)
 }
 
-// func TestGetAccount(t *testing.T) {
-// 	account1 := createRandomAccount(t)
-// 	account2, err := testQueries.GetAccount(context.Background(), account1.ID)
-// 	require.NoError(t, err)
-// 	require.NotEmpty(t, account2)
+func TestGetUser(t *testing.T) {
+	user1 := createRandomUser(t)
+	user2, err := testQueries.GetUser(context.Background(), user1.Username)
+	require.NoError(t, err)
+	require.NotEmpty(t, user2)
 
-// 	require.Equal(t, account1.ID, account2.ID)
-// 	require.Equal(t, account1.Owner, account2.Owner)
-// 	require.Equal(t, account1.Balance, account2.Balance)
-// 	require.Equal(t, account1.Currency, account2.Currency)
-// 	require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
-// }
+	require.Equal(t, user1.Username, user2.Username)
+	require.Equal(t, user1.HashedPassword, user2.HashedPassword)
+	require.Equal(t, user1.FullName, user2.FullName)
+	require.Equal(t, user1.Email, user2.Email)
+
+	require.WithinDuration(t, user1.PasswordChangedAt, user2.PasswordChangedAt, time.Second)
+	require.WithinDuration(t, user1.CreatedAt, user2.CreatedAt, time.Second)
+
+}
